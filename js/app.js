@@ -2,6 +2,8 @@
  * Create a list that holds all of your cards
  */
 
+const deck = ["diamond", "plane", "bomb","bolt", "anchor", "cube", "leaf", "bicycle","diamond", 
+							"plane", "bomb","bolt", "anchor", "cube", "leaf", "bicycle"];
 
 /*
  * Display the cards on the page
@@ -9,6 +11,15 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+
+//from the shuffled array now add the classes to the the list item....
+
+function createCards(deckArray) {
+	for (const card of deckArray){
+		console.log(card);
+	}
+}
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -21,11 +32,18 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 }
 
+function start() {
+	const deckShuffled = shuffle(deck);
+	createCards(deckShuffled);
+}
 
+
+window.addEventListener('load', function() {
+    start();
+})
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
