@@ -1,11 +1,19 @@
 /*
  * Create a list that holds all of your cards
  */
-
 const cardNames = ["diamond", "paper-plane-o", "bomb","bolt", "anchor", "cube", "leaf", "bicycle","diamond", 
 							"paper-plane-o", "bomb","bolt", "anchor", "cube", "leaf", "bicycle"];
 
 const deck = document.getElementsByClassName("deck")[0];
+
+function start() {
+	const deckShuffled = shuffle(cardNames);
+	createCards(deckShuffled);
+}
+
+window.addEventListener('load', function() {
+    start();
+})
 
 /*
  * Display the cards on the page
@@ -20,15 +28,17 @@ function createCards(deckArray) {
 	const deckFragment = document.createDocumentFragment();
 	
 	for (const card of deckArray){
-  	let x = document.createElement("LI");
+  	let li = document.createElement("LI");
   	let i = document.createElement("I");
 
-  	x.classList.add("card");
+
+
+  	li.classList.add("card");
   	
-  	const currentCard = x.appendChild(i);
+  	const currentCard = li.appendChild(i);
   	currentCard.classList.add("fa", "fa-" + card);
 
-  	deckFragment.append(x)
+  	deckFragment.append(li)
 	}
 	deck.appendChild(deckFragment);
 }
@@ -48,15 +58,7 @@ function shuffle(array) {
     return array;
 }
 
-function start() {
-	const deckShuffled = shuffle(cardNames);
-	createCards(deckShuffled);
-}
 
-
-window.addEventListener('load', function() {
-    start();
-})
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -67,3 +69,20 @@ window.addEventListener('load', function() {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+
+deck.addEventListener('click', function(event){
+	if(event.target.nodeName === "LI"){
+		click(event.target);
+	}
+});
+
+
+// display card when clicked
+function click(card){
+	// show card
+	card.classList.toggle("open");
+	card.classList.toggle("show");
+
+}
+
