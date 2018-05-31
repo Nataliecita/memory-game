@@ -6,6 +6,9 @@ const cardNames = ["diamond", "paper-plane-o", "bomb","bolt", "anchor", "cube", 
 
 const deck = document.getElementsByClassName("deck")[0];
 
+// Track number of moves
+let moves = 0
+
 let cards;
 let openCards = [];
  
@@ -98,13 +101,15 @@ function addCardListener(){
 
 // display card when clicked
 function click(card){
-	if (!openCards.includes(card)) {
+	if (!openCards.includes(card) && openCards.length < 2) {
 		card.classList.toggle("open");
 		card.classList.toggle("show");
 		openCards.push(card);
 
 		if(openCards.length === 2){
 			checkCard()
+			moves++;
+			console.log(moves);
 		}	
 	}		
 }
