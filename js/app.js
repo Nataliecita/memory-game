@@ -85,13 +85,6 @@ function shuffle(array) {
  */
 
 
-// deck.addEventListener('click', function(event){
-// 	if(event.target.nodeName === "LI"){
-// 		click(event.target);
-// 	}
-// });
-
-
 // add event listener for HTML Collection of cards
 function addCardListener(){
 	for(let i = 0; i < cards.length; i++){
@@ -149,6 +142,12 @@ function badGuess(pair){
 	pair[0].classList.remove("show", "open");
 	pair[1].classList.remove("show", "open");
 	openCards = []
+}
+
+
+// run timer when first click
+function timer(){
+
 }
 
 function gameOver(){
