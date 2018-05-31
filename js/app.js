@@ -102,26 +102,41 @@ function click(card){
 		card.classList.toggle("open");
 		card.classList.toggle("show");
 		openCards.push(card);
-	}	
+
+		if(openCards.length === 2){
+			checkCard()
+		}	
+	}		
 }
+
+
 
 // //keep track of open cards by grabbing all cards that have class open and show
 function checkCard(){
-	let pair = document.getElementsByClassName("show");
-	if (pair.length == 2){
-		console.log("only when two")
-		pair[0].innerHTML == pair[1].innerHTML ? badGuess(pair) : matched(pair)
-	}
+
+	if(openCards[0].innerHTML === openCards[1].innerHTML){
+			matched(openCards);
+	}	else {
+		setTimeout(function(){
+			badGuess(openCards);	
+		}, 1000);
+	}	
+
 }
 
 
 function matched(pair){
-	console.log("yas")
-	// add class and remove event listener for click
+	pair[0].classList.add("match");
+	pair[0].classList.remove("show", "open");
+	pair[1].classList.add("match");
+	pair[1].classList.remove("show", "open");
+	openCards = [];
 }
 
 function badGuess(pair){
-	console.log("noo")
+	pair[0].classList.remove("show", "open");
+	pair[1].classList.remove("show", "open");
+	openCards = []
 }
 
 // while(numClicks % 2 === 0){
