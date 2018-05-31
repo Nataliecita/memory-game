@@ -8,6 +8,8 @@ const deck = document.getElementsByClassName("deck")[0];
 
 // Track number of moves
 let moves = 0
+let movesCounter = document.querySelector(".moves")
+
 
 let cards;
 let openCards = [];
@@ -108,12 +110,16 @@ function click(card){
 
 		if(openCards.length === 2){
 			checkCard()
-			moves++;
-			console.log(moves);
+			addMove();
 		}	
 	}		
 }
 
+
+function addMove(){
+	moves++;
+	movesCounter.textContent= moves.toString();
+}
 
 
 // //keep track of open cards by grabbing all cards that have class open and show
@@ -135,6 +141,7 @@ function matched(pair){
 	pair[0].classList.remove("show", "open");
 	pair[1].classList.add("match");
 	pair[1].classList.remove("show", "open");
+
 	openCards = [];
 }
 
@@ -144,7 +151,12 @@ function badGuess(pair){
 	openCards = []
 }
 
-// while(numClicks % 2 === 0){
-// 	checkCard
-// }
+function gameOver(){
+
+}
+
+function resetGame(){
+
+}
+
 
