@@ -2,8 +2,10 @@
  * Create a list that holds all of your cards
  */
 
-const deck = ["diamond", "plane", "bomb","bolt", "anchor", "cube", "leaf", "bicycle","diamond", 
-							"plane", "bomb","bolt", "anchor", "cube", "leaf", "bicycle"];
+const cardNames = ["diamond", "paper-plane-o", "bomb","bolt", "anchor", "cube", "leaf", "bicycle","diamond", 
+							"paper-plane-o", "bomb","bolt", "anchor", "cube", "leaf", "bicycle"];
+
+const deck = document.getElementsByClassName("deck")[0];
 
 /*
  * Display the cards on the page
@@ -15,9 +17,20 @@ const deck = ["diamond", "plane", "bomb","bolt", "anchor", "cube", "leaf", "bicy
 //from the shuffled array now add the classes to the the list item....
 
 function createCards(deckArray) {
+	const deckFragment = document.createDocumentFragment();
+	
 	for (const card of deckArray){
-		console.log(card);
+  	let x = document.createElement("LI");
+  	let i = document.createElement("I");
+
+  	x.classList.add("card");
+  	
+  	const currentCard = x.appendChild(i);
+  	currentCard.classList.add("fa", "fa-" + card);
+
+  	deckFragment.append(x)
 	}
+	deck.appendChild(deckFragment);
 }
 
 
@@ -36,7 +49,7 @@ function shuffle(array) {
 }
 
 function start() {
-	const deckShuffled = shuffle(deck);
+	const deckShuffled = shuffle(cardNames);
 	createCards(deckShuffled);
 }
 
