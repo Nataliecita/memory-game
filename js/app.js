@@ -6,10 +6,21 @@ const cardNames = ["diamond", "paper-plane-o", "bomb","bolt", "anchor", "cube", 
 
 const deck = document.getElementsByClassName("deck")[0];
 
+let cards;
+let openCards = [];
+ 
+
+
+let numClicks = 0
+
 function start() {
 	const deckShuffled = shuffle(cardNames);
 	createCards(deckShuffled);
+
+	cards = document.getElementsByClassName("card");
+	addCardListener();
 }
+
 
 window.addEventListener('load', function() {
     start();
@@ -30,8 +41,6 @@ function createCards(deckArray) {
 	for (const card of deckArray){
   	let li = document.createElement("LI");
   	let i = document.createElement("I");
-
-
 
   	li.classList.add("card");
   	
@@ -71,18 +80,51 @@ function shuffle(array) {
  */
 
 
-deck.addEventListener('click', function(event){
-	if(event.target.nodeName === "LI"){
-		click(event.target);
-	}
-});
+// deck.addEventListener('click', function(event){
+// 	if(event.target.nodeName === "LI"){
+// 		click(event.target);
+// 	}
+// });
 
+
+// add event listener for HTML Collection of cards
+function addCardListener(){
+	for(let i = 0; i < cards.length; i++){
+		cards.item(i).addEventListener('click', function(event){
+			click(cards.item(i));
+		});
+	}
+}
 
 // display card when clicked
 function click(card){
-	// show card
-	card.classList.toggle("open");
-	card.classList.toggle("show");
-
+	if (!openCards.includes(card)) {
+		card.classList.toggle("open");
+		card.classList.toggle("show");
+		openCards.push(card);
+	}	
 }
+
+// //keep track of open cards by grabbing all cards that have class open and show
+function checkCard(){
+	let pair = document.getElementsByClassName("show");
+	if (pair.length == 2){
+		console.log("only when two")
+		pair[0].innerHTML == pair[1].innerHTML ? badGuess(pair) : matched(pair)
+	}
+}
+
+
+function matched(pair){
+	console.log("yas")
+	// add class and remove event listener for click
+}
+
+function badGuess(pair){
+	console.log("noo")
+}
+
+// while(numClicks % 2 === 0){
+// 	checkCard
+// }
 
