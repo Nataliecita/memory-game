@@ -167,7 +167,7 @@ function checkCard(){
 	}	else {
 		setTimeout(function(){
 			badGuess(openCards);	
-		}, 1000);
+		}, 700);
 	}	
 
 }
