@@ -25,7 +25,7 @@ let totalTime;
 
 let starForTime = true;
 
-let beginningStarCount;
+let currentStarCount;
 
 
 let cards;
@@ -37,6 +37,7 @@ function start() {
 	const deckShuffled = shuffle(cardNames);
 	createCards(deckShuffled);
 	createStars();
+
 
 	cards = document.getElementsByClassName("card");
 	addCardListener();
@@ -104,6 +105,10 @@ function createStars(){
   	starsFragment.append(li);
 	}
 	stars.appendChild(starsFragment);
+
+	stars = document.getElementsByClassName("stars")[0];
+	console.log("hi");
+	console.log(stars.childElementCount);
 }
 
 
@@ -222,7 +227,7 @@ function time(){
   	}
 
   	// lose a star for too much time
-  	if(distance/1000 > 24){
+  	if(distance/1000 > 28){
   		starForTime = false;
   	}
 
@@ -270,34 +275,28 @@ function newGame(){
 	openCards = []
 
 	//starCount
-	beginningStarCount = 3
+	currentStarCount = 3
 }
+
+
+
 
 
 // RATING
 function getRating(){
-
-	if(moves <= 10 && starForTime){
-		gameRating = 3;
-	} else if( moves <= 15){
-		gameRating = 2;
-	}else {
-		gameRating = 1;
-	}
-
-
+	if (moves > 10 && !starForTime){
+		currentStarCount--;
+	} else if( moves > 17){
+		currentStarCount--;
+	} 
 	//update stars
-	if(stars.length > 2 && gameRating == 2 ){
-		if(stars[1].parentNode) {
-  		stars[1].parentNode.removeChild(stars[1]);
-		}
-	} if(stars.length > 1 && gameRating == 1){
-			stars[1].parentNode.removeChild(stars[1])
+
+	if(currentStarCount < stars.childElementCount && stars.childElementCount > 1){
+		let firstStar = stars.firstElementChild;
+		stars.removeChild(firstStar)
+		console.log("updating stars");
 	}
-
 }
-
-
 
 
 // add listener for new game when icon is clicked
@@ -307,11 +306,7 @@ reset.addEventListener("click", function(){
 	document.querySelector(".deck").innerHTML = "";
 	movesCounter.textContent= "0";
 
-
-	//re-add stars
-	// stars.innerHTML = `<li><i class="fa fa-star"></i></li>
- //        		<li><i class="fa fa-star"></i></li>
- //        		<li><i class="fa fa-star"></i></li>`;
+	stars.innerHTML = "" ;
 
 	start();
 })
