@@ -125,7 +125,8 @@ function click(card){
 function addMove(){
 	moves++;
 	movesCounter.textContent= moves.toString();
-	// movesCounter.textContent= moves;
+
+	getRating();
 
 }
 
@@ -155,7 +156,6 @@ function matched(pair){
 
 	if(correctMatches === cardNames.length/2){
 		endGame()
-		
 	}
 }
 
@@ -248,20 +248,21 @@ function newGame(){
 
 
 // RATING
-function getRating(movesMade){
+function getRating(){
 	let gameRating;
 
-	if(movesMade <= 10 && starForTime){
+	if(moves <= 10 && starForTime){
 		gameRating = 3;
-	} else if( movesMade < 15){
+	} else if( moves <= 15){
 		gameRating = 2;
 	}else {
 		gameRating = 1;
 	}
-	return gameRating;
+	//update stars
+	console.log(gameRating);
 }
 
-	
+
 
 
 // add listener for new game when icon is clicked
