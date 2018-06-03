@@ -7,12 +7,12 @@ const cardNames = ["diamond", "paper-plane-o", "bomb","bolt", "anchor", "cube", 
 const deck = document.getElementsByClassName("deck")[0];
 
 // Track number of moves
-let moves = 0
+let moves;
 let movesCounter = document.querySelector(".moves")
-let correctMatches = 0;
+let correctMatches;
 
 //game state
-let gameOver = false;
+let gameOver;
 
 
 //timer 
@@ -23,10 +23,11 @@ let totalTime;
 
 
 let cards;
-let openCards = [];
+let openCards;
  
 
 function start() {
+	newGame();
 	const deckShuffled = shuffle(cardNames);
 	createCards(deckShuffled);
 
@@ -122,6 +123,8 @@ function click(card){
 function addMove(){
 	moves++;
 	movesCounter.textContent= moves.toString();
+	// movesCounter.textContent= moves;
+
 }
 
 
@@ -227,8 +230,23 @@ function endGame(){
 	totalTime = [minutes, seconds];
 }
 
-// function resetGame(){
+function newGame(){
+	moves = 0;
+	correctMatches = 0;
 
-// }
+//game state
+	gameOver = false;
+	openCards = []
+}
+
+
+// add listener for new game when icon is clicked
+const reset = document.querySelector(".restart");
+
+reset.addEventListener("click", function(){
+	document.querySelector(".deck").innerHTML = "";
+	movesCounter.textContent= "0";
+	start();
+})
 
 
