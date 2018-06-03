@@ -11,6 +11,11 @@ let moves = 0
 let movesCounter = document.querySelector(".moves")
 
 
+//timer 
+let startTime;
+let endTime;
+
+
 let cards;
 let openCards = [];
  
@@ -24,6 +29,8 @@ function start() {
 
 	cards = document.getElementsByClassName("card");
 	addCardListener();
+
+	time(); 
 }
 
 
@@ -145,17 +152,56 @@ function badGuess(pair){
 }
 
 
-// run timer when first click
-function timer(){
+
+function time(){
+	startTime = Date.now()
+
+	setInterval(function() {
+  	let millis = Date.now() - startTime;
+
+
+		let now = new Date().getTime();
+  	// Find the distance between now an start date
+  	let distance = now - startTime;
+
+  	// Time calculations for days, hours, minutes and seconds
+	  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	  let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  	// Display the time 
+  	if(minutes == 0){
+  		console.log("0 minutes")
+  		if(seconds < 10){
+  			document.querySelector(".timer").innerHTML = "Time: 0"+ minutes + ":" + "0"+seconds;
+  		} else{
+  			document.querySelector(".timer").innerHTML = "Time: 0"+ minutes + ":" + seconds;
+  		}
+  	} else{
+  		if(seconds < 10){
+  			document.querySelector(".timer").innerHTML = "Time: "+ minutes + ":" + "0"+seconds;
+  		}else{
+  			document.querySelector(".timer").innerHTML = "Time: "+ minutes + ":" + seconds;
+  		}
+  	}
+
+  	//WHEN GAME IS OVER
+  	// if (CONDITION) {
+   //  	clearInterval(x);
+   //  	// document.getElementById("demo").innerHTML = "EXPIRED";
+ 		// }
+
+	}, 1000);
+
 
 }
 
-function gameOver(){
 
-}
+// function gameOver(){
+// 	endTime = Date.now()
+// }
 
-function resetGame(){
+// function resetGame(){
 
-}
+// }
 
 

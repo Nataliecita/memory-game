@@ -109,6 +109,6 @@ h1 {
 }
 
 .score-panel .timer {
-    padding-left: 30px;
     display: inline-block;
+    margin-left: 35px;
 }
