@@ -9,19 +9,22 @@ const deck = document.getElementsByClassName("deck")[0];
 // Track number of moves
 let moves = 0
 let movesCounter = document.querySelector(".moves")
+let correctMatches = 0;
+
+//game state
+let gameOver = false;
 
 
 //timer 
 let startTime;
 let endTime;
 
+let totalTime;
+
 
 let cards;
 let openCards = [];
  
-
-
-let numClicks = 0
 
 function start() {
 	const deckShuffled = shuffle(cardNames);
@@ -143,6 +146,12 @@ function matched(pair){
 	pair[1].classList.remove("show", "open");
 
 	openCards = [];
+	correctMatches++;
+
+	if(correctMatches === cardNames.length/2){
+		endGame()
+		
+	}
 }
 
 function badGuess(pair){
@@ -156,7 +165,7 @@ function badGuess(pair){
 function time(){
 	startTime = Date.now()
 
-	setInterval(function() {
+	let timeInterval = setInterval(function() {
   	let millis = Date.now() - startTime;
 
 
@@ -164,13 +173,13 @@ function time(){
   	// Find the distance between now an start date
   	let distance = now - startTime;
 
-  	// Time calculations for days, hours, minutes and seconds
-	  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	  let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  	// Time calculations for days, hours, minutes and seconds 
+	  let minutes = calculateTime(distance, "minutes")
+
+	  let seconds = calculateTime(distance, "seconds")
 
   	// Display the time 
   	if(minutes == 0){
-  		console.log("0 minutes")
   		if(seconds < 10){
   			document.querySelector(".timer").innerHTML = "Time: 0"+ minutes + ":" + "0"+seconds;
   		} else{
@@ -185,20 +194,38 @@ function time(){
   	}
 
   	//WHEN GAME IS OVER
-  	// if (CONDITION) {
-   //  	clearInterval(x);
-   //  	// document.getElementById("demo").innerHTML = "EXPIRED";
- 		// }
+  	if (gameOver) {
+    	clearInterval(timeInterval);
+    	// document.getElementById("demo").innerHTML = "EXPIRED";
+    	document.querySelector(".timer").innerHTML = "Time:00:00"
+ 		}
 
 	}, 1000);
 
 
 }
 
+function calculateTime(distance, timeType){
+	let interval
+	if(timeType == "seconds") {
+		interval = Math.floor((distance % (1000 * 60)) / 1000);
+	} else{
+	  interval = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	}
+	return interval; 
+}
 
-// function gameOver(){
-// 	endTime = Date.now()
-// }
+
+function endGame(){
+	endTime = Date.now();
+	gameOver = true;
+	totalTime = endTime - startTime;
+
+	let minutes = calculateTime(totalTime, "minutes");
+	let seconds = calculateTime(totalTime, "seconds");
+
+	totalTime = [minutes, seconds];
+}
 
 // function resetGame(){
 
