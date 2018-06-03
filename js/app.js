@@ -21,6 +21,8 @@ let endTime;
 
 let totalTime;
 
+let starForTime = true;
+
 
 let cards;
 let openCards;
@@ -196,6 +198,11 @@ function time(){
   		}
   	}
 
+  	// lose a star for too much time
+  	if(distance/1000 > 24){
+  		starForTime = false;
+  	}
+
   	//WHEN GAME IS OVER
   	if (gameOver) {
     	clearInterval(timeInterval);
@@ -238,6 +245,23 @@ function newGame(){
 	gameOver = false;
 	openCards = []
 }
+
+
+// RATING
+function getRating(movesMade){
+	let gameRating;
+
+	if(movesMade <= 10 && starForTime){
+		gameRating = 3;
+	} else if( movesMade < 15){
+		gameRating = 2;
+	}else {
+		gameRating = 1;
+	}
+	return gameRating;
+}
+
+	
 
 
 // add listener for new game when icon is clicked
