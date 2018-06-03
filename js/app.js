@@ -6,6 +6,8 @@ const cardNames = ["diamond", "paper-plane-o", "bomb","bolt", "anchor", "cube", 
 
 const deck = document.getElementsByClassName("deck")[0];
 
+let stars = document.getElementsByClassName("stars")[0];
+
 // Track number of moves
 let moves;
 let movesCounter = document.querySelector(".moves")
@@ -23,6 +25,8 @@ let totalTime;
 
 let starForTime = true;
 
+let beginningStarCount;
+
 
 let cards;
 let openCards;
@@ -32,6 +36,7 @@ function start() {
 	newGame();
 	const deckShuffled = shuffle(cardNames);
 	createCards(deckShuffled);
+	createStars();
 
 	cards = document.getElementsByClassName("card");
 	addCardListener();
@@ -84,6 +89,24 @@ function shuffle(array) {
     }
     return array;
 }
+
+
+// create stars
+function createStars(){
+
+	const starsFragment = document.createDocumentFragment();
+
+	for (i = 0; i < 3; i++) {
+		let li = document.createElement("LI");
+  	let i = document.createElement("I");
+
+  	li.classList.add("fa", "fa-star");
+  	starsFragment.append(li);
+	}
+	stars.appendChild(starsFragment);
+}
+
+
 
 
 /*
@@ -238,18 +261,21 @@ function endGame(){
 }
 
 function newGame(){
+	gameRating = 3;
 	moves = 0;
 	correctMatches = 0;
 
 //game state
 	gameOver = false;
 	openCards = []
+
+	//starCount
+	beginningStarCount = 3
 }
 
 
 // RATING
 function getRating(){
-	let gameRating;
 
 	if(moves <= 10 && starForTime){
 		gameRating = 3;
@@ -258,8 +284,17 @@ function getRating(){
 	}else {
 		gameRating = 1;
 	}
+
+
 	//update stars
-	console.log(gameRating);
+	if(stars.length > 2 && gameRating == 2 ){
+		if(stars[1].parentNode) {
+  		stars[1].parentNode.removeChild(stars[1]);
+		}
+	} if(stars.length > 1 && gameRating == 1){
+			stars[1].parentNode.removeChild(stars[1])
+	}
+
 }
 
 
@@ -271,6 +306,13 @@ const reset = document.querySelector(".restart");
 reset.addEventListener("click", function(){
 	document.querySelector(".deck").innerHTML = "";
 	movesCounter.textContent= "0";
+
+
+	//re-add stars
+	// stars.innerHTML = `<li><i class="fa fa-star"></i></li>
+ //        		<li><i class="fa fa-star"></i></li>
+ //        		<li><i class="fa fa-star"></i></li>`;
+
 	start();
 })
 
