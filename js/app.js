@@ -23,9 +23,10 @@ let endTime;
 
 let totalTime;
 
-let starForTime = true;
-let timeLostStar = false
 
+
+
+// not sure i am using this...
 let currentStarCount;
 
 
@@ -281,25 +282,42 @@ function newGame(){
 
 
 
-
-
-// RATING
 function getRating(){
-
-	if (!starForTime && !timeLostStar){
-		timeLostStar = true;
-		currentStarCount--;
-	} else if( moves > 10){
-		currentStarCount--;
-	} 
-	//update stars
-
-	if(currentStarCount < stars.childElementCount && stars.childElementCount > 1){
-		let firstStar = stars.firstElementChild;
-		stars.removeChild(firstStar)
-		console.log("updating stars");
-	}
+		if(moves == 10 ){
+			emptyHalfStar(2);
+		console.log("past 10 moves, 2.5 stars left");
+		} else if(moves == 12 ) {
+			emptyStar(2);
+			console.log("past 12 moves, 2 stars left");
+		} else if (moves == 14){
+			emptyHalfStar(1);
+			console.log("past 14 moves, 1.5 start left ");
+		} else if(moves == 16) {
+			emptyStar(1);
+			console.log("past 16 moves, 1 left");
+		} else if(moves == 18){
+			console.log("oast 18 moves")
+			emptyHalfStar(0);
+		}
+		else if(moves == 20){
+			console.log("past 20 moves, no stars left");
+			emptyStar(0);
+		}
 }
+
+
+function emptyHalfStar(starPosition){
+	console.log(stars.children[starPosition])
+	stars.children[starPosition].classList.remove("fa-star");
+	stars.children[starPosition].classList.add("fa-star-half-empty")
+}
+
+function emptyStar(starPosition){
+	stars.children[starPosition].classList.remove("fa-star-half-empty")
+	stars.children[starPosition].classList.add("fa-star-o")
+}
+
+
 
 
 // add listener for new game when icon is clicked
