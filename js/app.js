@@ -24,6 +24,7 @@ let endTime;
 let totalTime;
 
 let starForTime = true;
+let timeLostStar = false
 
 let currentStarCount;
 
@@ -284,9 +285,11 @@ function newGame(){
 
 // RATING
 function getRating(){
-	if (moves > 10 && !starForTime){
+
+	if (!starForTime && !timeLostStar){
+		timeLostStar = true;
 		currentStarCount--;
-	} else if( moves > 17){
+	} else if( moves > 10){
 		currentStarCount--;
 	} 
 	//update stars
