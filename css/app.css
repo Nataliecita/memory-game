@@ -137,7 +137,7 @@ h1 {
 
 .modal-header {
     padding: 2px 16px;
-    background-color: #5cb85c;
+    background-color: #00bfff;
     color: white;
 }
 
@@ -154,7 +154,7 @@ h1 {
 /* Modal Footer */
 .modal-footer {
     padding: 2px 16px;
-    background-color: #5cb85c;
+    background-color: #00bfff;
     color: white;
     text-align: center;
 }
