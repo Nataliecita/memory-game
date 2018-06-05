@@ -272,6 +272,7 @@ function endGame(){
 	let seconds = calculateTime(totalTime, "seconds");
 
 	totalTime = [minutes, seconds];
+	updateModal();
 	openModal();
 }
 
@@ -293,22 +294,16 @@ function newGame(){
 function getRating(){
 		if(moves == 10 ){
 			emptyHalfStar(2);
-		console.log("past 10 moves, 2.5 stars left");
 		} else if(moves == 12 ) {
 			emptyStar(2);
-			console.log("past 12 moves, 2 stars left");
 		} else if (moves == 14){
 			emptyHalfStar(1);
-			console.log("past 14 moves, 1.5 start left ");
 		} else if(moves == 16) {
 			emptyStar(1);
-			console.log("past 16 moves, 1 left");
 		} else if(moves == 18){
-			console.log("oast 18 moves")
 			emptyHalfStar(0);
 		}
 		else if(moves == 20){
-			console.log("past 20 moves, no stars left");
 			emptyStar(0);
 		}
 }
@@ -345,17 +340,29 @@ reset.addEventListener("click", function(){
 // Get the modal
 function openModal(){
 	   modal.style.display = "block";
+
+
 }
 
-var modal = document.getElementById('myModal');
+function updateModal(){
+	document.getElementById("congrats-moves").innerText = moves;
+	document.getElementById("congrats-time").innerText = `${totalTime[0]} minute(s) and ${totalTime[1]} seconds `;
+	document.getElementById("congrats-rating").innerHTML = stars.innerHTML;
+
+}
+
+let modal = document.getElementById('myModal');
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+let span = document.getElementsByClassName("close")[0];
+
 
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
+	  document.getElementById("congrats-moves").innerText = totalTime[0];
     modal.style.display = "none";
+
 }
 
 // When the user clicks anywhere outside of the modal, close it
