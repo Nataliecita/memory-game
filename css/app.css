@@ -127,9 +127,12 @@ h1 {
   padding-top: 100px;
   padding-left: 50px;
   padding-right: 50px;
-  width: 100%;
-  height:100%;
+  max-width: 100%;
+  max-height:100%;
   margin:auto;
+
+    width: 600px;
+    height: 400px;
 }
 
 .modal-header {
@@ -138,14 +141,22 @@ h1 {
     color: white;
 }
 
+.modal-header h2{
+    text-align: center;
+}
+
 /* Modal Body */
-.modal-body {padding: 2px 16px;}
+.modal-body {
+    padding: 2px 16px;
+    text-align: center;
+}
 
 /* Modal Footer */
 .modal-footer {
     padding: 2px 16px;
     background-color: #5cb85c;
     color: white;
+    text-align: center;
 }
 
 /* Modal Content */
@@ -155,7 +166,8 @@ h1 {
     margin: auto;
     padding: 0;
     border: 1px solid #888;
-    width: 80%;
+
+    width: auto;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     animation-name: animatetop;
     animation-duration: 0.4s
