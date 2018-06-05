@@ -20,16 +20,8 @@ let gameOver;
 
 //timer 
 let startTime;
-let endTime;
-
+let currentTime;
 let totalTime;
-
-
-
-
-// not sure i am using this...
-let currentStarCount;
-
 
 let cards;
 let openCards;
@@ -205,12 +197,11 @@ function time(){
 	startTime = Date.now()
 
 	let timeInterval = setInterval(function() {
-  	let millis = Date.now() - startTime;
+  	// let millis = Date.now() - startTime;
 
-
-		let now = timeNow();
+		currentTime = timeNow();
   	// Find the distance between now an start date
-  	let distance = now - startTime;
+  	let distance = currentTime - startTime;
 
   	// Time calculations for days, hours, minutes and seconds 
 	  let minutes = calculateTime(distance, "minutes")
@@ -242,7 +233,7 @@ function time(){
     	clearInterval(timeInterval);
  		}
 
-	}, 1000);
+	}, 0);
 
 
 }
@@ -259,9 +250,8 @@ function calculateTime(distance, timeType){
 
 
 function endGame(){
-	endTime = timeNow();
 	gameOver = true;
-	totalTime = endTime - startTime;
+	totalTime = currentTime - startTime;
 
 	let minutes = calculateTime(totalTime, "minutes");
 	let seconds = calculateTime(totalTime, "seconds");
@@ -279,9 +269,6 @@ function newGame(){
 //game state
 	gameOver = false;
 	openCards = []
-
-	//starCount
-	currentStarCount = 3
 }
 
 
@@ -363,8 +350,6 @@ playAgain.addEventListener("click", function(){
 	redrawBoard();
 	start();
 });
-
-
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
