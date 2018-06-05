@@ -1,12 +1,4 @@
-// make congrats message 
-
-// 1 pop  up modal, when game is over
-// https://www.w3schools.com/howto/howto_css_modals.asp
-//2. display rating, moves and time
-// 3.ask if they want to play again. link the restard game or new game thing. 
-
-
-
+// fix once the player wins the timer stops on the board.. don't change it so quick till after game is restarted
 /*
  * Create a list that holds all of your cards
  */
@@ -203,6 +195,11 @@ function badGuess(pair){
 }
 
 
+function timeNow(){
+	let time = new Date().getTime();
+	return time;
+}
+
 
 function time(){
 	startTime = Date.now()
@@ -211,7 +208,7 @@ function time(){
   	let millis = Date.now() - startTime;
 
 
-		let now = new Date().getTime();
+		let now = timeNow();
   	// Find the distance between now an start date
   	let distance = now - startTime;
 
@@ -243,8 +240,6 @@ function time(){
   	//WHEN GAME IS OVER
   	if (gameOver) {
     	clearInterval(timeInterval);
-    	// document.getElementById("demo").innerHTML = "EXPIRED";
-    	document.querySelector(".timer").innerHTML = "Time:00:00"
  		}
 
 	}, 1000);
@@ -264,7 +259,7 @@ function calculateTime(distance, timeType){
 
 
 function endGame(){
-	endTime = Date.now();
+	endTime = timeNow();
 	gameOver = true;
 	totalTime = endTime - startTime;
 
@@ -335,6 +330,9 @@ function redrawBoard(){
 	document.querySelector(".deck").innerHTML = "";
 	movesCounter.textContent= "0";
 	stars.innerHTML = "" ;
+
+	//redraw time;
+	document.querySelector(".timer").innerHTML = "Time:00:00"
 }
 
 
