@@ -118,8 +118,6 @@ function createStars(){
 	stars.appendChild(starsFragment);
 
 	stars = document.getElementsByClassName("stars")[0];
-	console.log("hi");
-	console.log(stars.childElementCount);
 }
 
 
@@ -274,6 +272,7 @@ function endGame(){
 	let seconds = calculateTime(totalTime, "seconds");
 
 	totalTime = [minutes, seconds];
+	openModal();
 }
 
 function newGame(){
@@ -344,18 +343,15 @@ reset.addEventListener("click", function(){
 
 // MODAL
 // Get the modal
-var modal = document.getElementById('myModal');
+function openModal(){
+	   modal.style.display = "block";
+}
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+var modal = document.getElementById('myModal');
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-    modal.style.display = "block";
-}
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
