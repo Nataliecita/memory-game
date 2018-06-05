@@ -152,8 +152,8 @@ function click(card){
 		openCards.push(card);
 
 		if(openCards.length === 2){
-			checkCard()
 			addMove();
+			checkCard()
 		}	
 	}		
 }
@@ -327,21 +327,21 @@ function emptyStar(starPosition){
 const reset = document.querySelector(".restart");
 
 reset.addEventListener("click", function(){
-	document.querySelector(".deck").innerHTML = "";
-	movesCounter.textContent= "0";
-
-	stars.innerHTML = "" ;
-
+	redrawBoard();
 	start();
 })
+
+function redrawBoard(){
+	document.querySelector(".deck").innerHTML = "";
+	movesCounter.textContent= "0";
+	stars.innerHTML = "" ;
+}
 
 
 // MODAL
 // Get the modal
 function openModal(){
 	   modal.style.display = "block";
-
-
 }
 
 function updateModal(){
@@ -356,20 +356,28 @@ let modal = document.getElementById('myModal');
 // Get the <span> element that closes the modal
 let span = document.getElementsByClassName("close")[0];
 
+let playAgain = document.getElementById("play-again");
+
+
+// When user clicks plays again, hide modal and restart game;
+playAgain.addEventListener("click", function(){
+	modal.style.display = "none";
+	redrawBoard();
+	start();
+});
+
 
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
-	  document.getElementById("congrats-moves").innerText = totalTime[0];
-    modal.style.display = "none";
-
+	modal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
+	if (event.target == modal) {
+		modal.style.display = "none";
+  }
 }
 
 
