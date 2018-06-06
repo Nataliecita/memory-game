@@ -1,4 +1,3 @@
-// fix once the player wins the timer stops on the board.. don't change it so quick till after game is restarted
 /*
  * Create a list that holds all of your cards
  */
